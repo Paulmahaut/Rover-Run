@@ -11,3 +11,11 @@ Pour le prochain niveau on aura un array contenant toutes les valeurs sauf la va
 
 ET on aura une file contenant la valeur du mouvement choisi
   (ce qui nous permet d'avoir le chemin root->leaf)
+
+EXAMPLE:
+
+                   [1,(2),3,4,5]    
+                      /
+                     /
+                
+                    
