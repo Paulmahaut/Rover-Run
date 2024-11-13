@@ -36,19 +36,6 @@ int main() {
     }
     displayMap(map);
 
-    // Set initial position of MARC
-    t_localisation marc_loc = loc_init(0, 0, NORTH);
-
-    // Create the root of the movement tree with initial cost
-    t_treeNode* root = createNode(marc_loc, map.costs[marc_loc.pos.y][marc_loc.pos.x]);
-
-    // Find the optimal path in terms of cost from root to leaf
-    int min_cost;
-    findMinCostPath(root, &min_cost);
-    printf("Minimum cost to reach target: %d\n", min_cost);
-
-    // Free allocated resources for the tree
-    freeTree(root);
 
     return 0;
 }
