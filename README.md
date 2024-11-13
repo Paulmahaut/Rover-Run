@@ -1,5 +1,3 @@
 # Rover-Run
 School project full in C
-Alexis et Raphaël écrivez-ici : 
-Bonjour ! Le monde et les alliens 
-C'est aliens mais bon...
+By Alexis, Raphaël and Paul
