@@ -35,6 +35,9 @@ int main() {
         printf("\n");
     }
     displayMap(map);
+    t_treeNode *testNode = createNode(F_10, _soil_cost[PLAIN]); // Exemple : Mouvement F_10, coût pour PLAIN
+    printf("Node created: Move = %s, Cost = %d\n", getMoveAsString(testNode->move), testNode->cost);
+   // createNode(F_10, 1);
 
 
     return 0;
