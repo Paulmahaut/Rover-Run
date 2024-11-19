@@ -9,3 +9,9 @@ typedef struct s_treeNode {
 } t_treeNode;
 
 t_treeNode* createNode(t_move move, int cost);
+
+void addChild(t_treeNode *parent, t_treeNode *child);
+
+void printTree(t_treeNode *node, int level);
+
+//oid freeTree(t_treeNode *node);
