@@ -35,11 +35,14 @@ void addChild(t_treeNode *parent, t_treeNode *child) {
 
         int total_cost = parent->cost + move_cost;
 
-        t_treeNode *child = createNode(move, total_cost);
-        addChild(parent, child);
+        t_treeNode *new_child = createNode(move, total_cost);
+        addChild(parent, new_child);
 
         // Simule la position de MARC après le mouvement pour générer les prochains niveaux
         loc = displacement(loc, move);
+
+        // Print the location after the move
+        printf("Move: %s, New Location: (%d, %d)\n", getMoveAsString(move), loc.pos.x, loc.pos.y);
     }
 }
 
@@ -51,7 +54,7 @@ void printTree(t_treeNode *node, int level) {
         printf("  ");
     }
     // node information
-    printf("Move: %s, Cost: %d\n", getMoveAsString(node->move), node->cost);
+    printf("Move: %s, Cost: %d\n", getMoveAsString(node->move), node->cost, node->loc.pos.x, node->loc.pos.y);
 
     // recursive call for children
     for (int i = 0; i < node->num_children; i++) {

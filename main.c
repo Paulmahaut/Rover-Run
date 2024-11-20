@@ -41,7 +41,7 @@ int main() {
    // createNode(F_10, 1);
 
    //second test for creating a node and filling it manually
-   /* t_treeNode *root = createNode(F_10, 0); // Move F_10, cost initial 0
+  /*  t_treeNode *root = createNode(F_10, 0); // Move F_10, cost initial 0
 
     t_treeNode *child1 = createNode(F_20, 1);
     t_treeNode *child2 = createNode(F_30, 2);
@@ -55,9 +55,30 @@ int main() {
     addChild(child1, child3);
     addChild(child2, child4);
 
-    printTree(root, 0); */
+    printTree(root, 0);*/
 
+ // Create the root node
+    t_treeNode *root = createNode(F_10, 0); // Example: Move F_10, initial cost 0
+    root->loc = (t_localisation){0, 0}; // Initial location
+    root->map = map; // Assign the map to the root node
 
+    // Add children to the root node
+    for (int i = 0; i < 9; i++) {
+        t_move move = (t_move)i;
+        int move_cost = calculateMoveCost(root->loc, move, map);
+        if (move_cost != COST_UNDEF) {
+            t_treeNode *child = createNode(move, move_cost);
+            addChild(root, child);
+        }
+    }
+
+    // Print the tree
+    printTree(root, 0);
+
+    // Free the tree
+    //freeTree(root);
+
+    return 0;
 
     return 0;
 }

@@ -135,10 +135,27 @@ t_localisation translate(t_localisation loc, t_move move)
 
 /* definitions of exported functions */
 
-char *getMoveAsString(t_move move)
+/*char *getMoveAsString(t_move move)
 {
     return _moves[move];
 }
+*/
+ char* getMoveAsString(t_move move) {
+    switch (move) {
+        case F_10:
+            return "F_10";
+        case F_20:
+            return "F_20";
+        case F_30:
+            return "F_30";
+        case T_LEFT:
+            return "T_LEFT";
+        case T_RIGHT:
+            return "T_RIGHT";
+        default: return "UNKNOWN";
+    }
+}
+
 
 t_localisation displacement (t_localisation loc, t_move move)
 {
