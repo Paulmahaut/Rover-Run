@@ -26,7 +26,7 @@ int main() {
         }
         printf("\n");
     }
-    // printf the costs, aligned left 5 digits
+    /* printf the costs, aligned left 5 digits
     for (int i = 0; i < map.y_max; i++)
     {
         for (int j = 0; j < map.x_max; j++)
@@ -34,14 +34,14 @@ int main() {
             printf("%-5d ", map.costs[i][j]);
         }
         printf("\n");
-    }
+    }*/
    /* displayMap(map);
     t_treeNode *testNode = createNode(F_10, _soil_cost[PLAIN]); // Example : Move F_10, cost pour PLAIN
     printf("Node created: Move = %s, Cost = %d\n", getMoveAsString(testNode->move), testNode->cost); */
    // createNode(F_10, 1);
 
    //second test for creating a node and filling it manually
-    t_treeNode *root = createNode(F_10, 0); // Move F_10, cost initial 0
+   /* t_treeNode *root = createNode(F_10, 0); // Move F_10, cost initial 0
 
     t_treeNode *child1 = createNode(F_20, 1);
     t_treeNode *child2 = createNode(F_30, 2);
@@ -55,7 +55,8 @@ int main() {
     addChild(child1, child3);
     addChild(child2, child4);
 
-    printTree(root, 0);
+    printTree(root, 0); */
+
 
 
     return 0;

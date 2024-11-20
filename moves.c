@@ -140,7 +140,7 @@ char *getMoveAsString(t_move move)
     return _moves[move];
 }
 
-t_localisation move(t_localisation loc, t_move move)
+t_localisation displacement (t_localisation loc, t_move move)
 {
     t_localisation new_loc;
     new_loc.ori = rotate(loc.ori, move);
@@ -150,7 +150,7 @@ t_localisation move(t_localisation loc, t_move move)
 
 void updateLocalisation(t_localisation *p_loc, t_move m)
 {
-    *p_loc = move(*p_loc, m);
+    *p_loc = displacement(*p_loc, m);
     return;
 }
 

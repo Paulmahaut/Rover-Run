@@ -39,7 +39,7 @@ void addChild(t_treeNode *parent, t_treeNode *child) {
         addChild(parent, child);
 
         // Simule la position de MARC après le mouvement pour générer les prochains niveaux
-        loc = move(loc, move);
+        loc = displacement(loc, move);
     }
 }
 
@@ -61,7 +61,7 @@ void printTree(t_treeNode *node, int level) {
 
 int calculateMoveCost(t_localisation loc, t_move move, t_map map) {
     // Simuler la nouvelle localisation après le mouvement
-    t_localisation new_loc = move(loc, move);
+    t_localisation new_loc = displacement(loc, move);
 
     // Vérifier si la nouvelle position est valide
     if (!isValidLocalisation(new_loc.pos, map.x_max, map.y_max) ||
