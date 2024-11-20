@@ -4,20 +4,20 @@
 typedef struct s_treeNode {
     t_move move; // mouvement of the node
     int cost; //
-    struct s_treeNode **children1; // History of travel
-    struct s_treeNode **children2; // History of travel
-    struct s_treeNode **children3; // History of travel
-    struct s_treeNode **children4; // History of travel
-    struct s_treeNode **children5; // History of travel
-    struct s_treeNode **children6; // History of travel
-    struct s_treeNode **children7; // History of traveL
-    enum e_move type_mov1; enum e_move F_10;
-    int type_mov2;
-    int type_mov3;
-    int type_mov4;
-    int type_mov5;
-    int type_mov6;
-    int type_mov7;
+    struct s_treeNode **child1; // Children with the mov "F_10"  Forward 10 m
+    struct s_treeNode **child2; // Children with the mov "F_20"  Forward 20 m
+    struct s_treeNode **child3; // Children with the mov "F_30"  Forward 30 m
+    struct s_treeNode **child4; // Children with the mov "B_10"  Backward 10 m
+    struct s_treeNode **child5; // Children with the mov "T_LEFT" // Turn left (+90°)
+    struct s_treeNode **child6; // Children with the mov "T_RIGHT" // Turn right (-90°)
+    struct s_treeNode **child7; // Children with the mov "U_TURN" (180°)
+    enum e_move type_mov1; // Variable associated to the mov "F_10"
+    enum e_move type_mov2; // Variable associated to the mov "F_20"
+    enum e_move type_mov3; // Variable associated to the mov "F_30"
+    enum e_move type_mov4; // Variable associated to the mov "B_10"
+    enum e_move type_mov5; // Variable associated to the mov "T_LEFT"
+    enum e_move type_mov6; // Variable associated to the mov "T_RIGHT"
+    enum e_move type_mov7; // Variable associated to the mov "U_TURN"
     t_localisation loc; // Localisation of the robot
     t_map map; // Map
 } t_treeNode;

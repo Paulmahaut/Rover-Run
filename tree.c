@@ -6,8 +6,20 @@ t_treeNode* createNode(t_move move, int cost) {
     t_treeNode *node = malloc(sizeof(t_treeNode));
     node->move = move;
     node->cost = cost;
-    node->children = NULL;
-    node->type_mov;
+    node->child1 = NULL; // Children with the mov "F_10"  Forward 10 m
+    node->child2 = NULL; // Children with the mov "F_20"  Forward 20 m
+    node->child3 = NULL; // Children with the mov "F_30"  Forward 30 m
+    node->child4 = NULL; // Children with the mov "B_10"  Backward 10 m
+    node->child5 = NULL; // Children with the mov "T_LEFT" // Turn left (+90°)
+    node->child6 = NULL; // Children with the mov "T_RIGHT" // Turn right (-90°)
+    node->child7 = NULL; // Children with the mov "U_TURN" (180°)
+    node->type_mov1 = F_10; // Variable associated to the mov "F_10"
+    node->type_mov2 = F_20; // Variable associated to the mov "F_20"
+    node->type_mov3 = F_30; // Variable associated to the mov "F_30"
+    node->type_mov4 = B_10; // Variable associated to the mov "B_10"
+    node->type_mov5 = T_LEFT; // Variable associated to the mov "T_LEFT"
+    node->type_mov6 = T_RIGHT; // Variable associated to the mov "T_RIGHT"
+    node->type_mov7 = U_TURN; // Variable associated to the mov "U_TURN"
     return node;
 }
 
