@@ -2,10 +2,22 @@
 #include "moves.h"
 #include "loc.h"
 typedef struct s_treeNode {
-    t_move move; // mouvment of the node
+    t_move move; // mouvement of the node
     int cost; //
-    struct s_treeNode **children; // History of travel
-    int num_children; // Number of childs
+    struct s_treeNode **children1; // History of travel
+    struct s_treeNode **children2; // History of travel
+    struct s_treeNode **children3; // History of travel
+    struct s_treeNode **children4; // History of travel
+    struct s_treeNode **children5; // History of travel
+    struct s_treeNode **children6; // History of travel
+    struct s_treeNode **children7; // History of traveL
+    enum e_move type_mov1; enum e_move F_10;
+    int type_mov2;
+    int type_mov3;
+    int type_mov4;
+    int type_mov5;
+    int type_mov6;
+    int type_mov7;
     t_localisation loc; // Localisation of the robot
     t_map map; // Map
 } t_treeNode;

@@ -7,7 +7,7 @@ t_treeNode* createNode(t_move move, int cost) {
     node->move = move;
     node->cost = cost;
     node->children = NULL;
-    node->num_children = 0;
+    node->type_mov;
     return node;
 }
 
