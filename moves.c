@@ -3,6 +3,8 @@
 //
 
 #include "moves.h"
+#include "map.h"
+#include <stdio.h>
 
 /* prototypes of local functions */
 /* local functions are used only in this file, as helper functions */
@@ -154,3 +156,17 @@ void updateLocalisation(t_localisation *p_loc, t_move m)
     return;
 }
 
+t_localisation simulateMoves(t_localisation loc, t_move *moves, int num_moves, t_map map) {
+    for (int i = 0; i < num_moves; i++) {
+        t_move move = moves[i];
+        t_localisation new_loc = displacement(loc, move);
+        if (!isValidLocalisation(new_loc.pos, map.x_max, map.y_max) || map.soils[new_loc.pos.y][new_loc.pos.x] == CREVASSE) {
+            printf("MARC encountered a crevasse or invalid move at (%d, %d).\n", new_loc.pos.x, new_loc.pos.y);
+            break; //Comme avec generateTree, on verefie si MARC est pas hors de la map ou dans une crevasse
+        }
+        printf("Move: %s -> New Position: (%d, %d), Orientation: %d\n",
+               getMoveAsString(move), new_loc.pos.x, new_loc.pos.y, new_loc.ori);
+        loc = new_loc; //On change la position retenue par la nouvelle position
+    }
+    return loc;
+}

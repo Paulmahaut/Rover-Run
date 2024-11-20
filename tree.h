@@ -10,7 +10,7 @@ typedef struct s_treeNode {
     t_map map; // Map
 } t_treeNode;
 
-t_treeNode* createNode(t_move move, int cost);
+t_treeNode* createNode(t_localisation loc,t_move move, int cost);
 
 void addChild(t_treeNode *parent, t_treeNode *child);
 
