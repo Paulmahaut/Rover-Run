@@ -1,4 +1,3 @@
-// tree.h
 #ifndef TREE_H
 #define TREE_H
 
@@ -7,12 +6,12 @@
 #include "loc.h"
 
 typedef struct Node {
-    int cost;               // Cost of the node
-    struct Node** children; // Array of pointers to child nodes
-    int num_children;       // Number of children
-    t_localisation loc;     // Localisation of the robot
-    t_move move;            // Move made to reach this node
-            parent;                 // Parent node
+    int cost;
+    struct Node** children;
+    int num_children;
+    t_localisation loc;
+    t_move move;
+    struct Node* parent;
 } Node;
 
 Node* createNode(int cost, t_localisation loc, t_move move);
