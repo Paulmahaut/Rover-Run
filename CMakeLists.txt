@@ -17,4 +17,5 @@ add_executable(Rover_Run
         queue.h
         stack.c
         stack.h
-        tree.h)
+        tree.h
+        tree.c)

@@ -91,6 +91,13 @@ build CMakeFiles/Rover_Run.dir/stack.c.obj: C_COMPILER__Rover_Run_unscanned_Debu
   OBJECT_DIR = CMakeFiles\Rover_Run.dir
   OBJECT_FILE_DIR = CMakeFiles\Rover_Run.dir
 
+build CMakeFiles/Rover_Run.dir/tree.c.obj: C_COMPILER__Rover_Run_unscanned_Debug C$:/Users/paulm/Documents/Rover-Run/tree.c || cmake_object_order_depends_target_Rover_Run
+  DEP_FILE = CMakeFiles\Rover_Run.dir\tree.c.obj.d
+  FLAGS = -g -std=gnu11 -fdiagnostics-color=always
+  INCLUDES = -IC:/Users/paulm/Documents/Rover-Run/.
+  OBJECT_DIR = CMakeFiles\Rover_Run.dir
+  OBJECT_FILE_DIR = CMakeFiles\Rover_Run.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target Rover_Run
@@ -99,7 +106,7 @@ build CMakeFiles/Rover_Run.dir/stack.c.obj: C_COMPILER__Rover_Run_unscanned_Debu
 #############################################
 # Link the executable Rover_Run.exe
 
-build Rover_Run.exe: C_EXECUTABLE_LINKER__Rover_Run_Debug CMakeFiles/Rover_Run.dir/loc.c.obj CMakeFiles/Rover_Run.dir/main.c.obj CMakeFiles/Rover_Run.dir/map.c.obj CMakeFiles/Rover_Run.dir/moves.c.obj CMakeFiles/Rover_Run.dir/queue.c.obj CMakeFiles/Rover_Run.dir/stack.c.obj
+build Rover_Run.exe: C_EXECUTABLE_LINKER__Rover_Run_Debug CMakeFiles/Rover_Run.dir/loc.c.obj CMakeFiles/Rover_Run.dir/main.c.obj CMakeFiles/Rover_Run.dir/map.c.obj CMakeFiles/Rover_Run.dir/moves.c.obj CMakeFiles/Rover_Run.dir/queue.c.obj CMakeFiles/Rover_Run.dir/stack.c.obj CMakeFiles/Rover_Run.dir/tree.c.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\Rover_Run.dir
