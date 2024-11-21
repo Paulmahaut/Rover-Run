@@ -5,6 +5,41 @@
 #include "moves.h"
 #include "loc.h"
 
+void printMapWithRobot(t_map map, t_localisation loc) {
+    for (int i = 0; i < map.y_max; i++) {
+        for (int j = 0; j < map.x_max; j++) {
+            if (i == loc.pos.y && j == loc.pos.x) {
+                printf("R ");
+            } else {
+                switch (map.soils[i][j]) {
+                    case BASE_STATION: printf("B "); break;
+                    case PLAIN: printf(". "); break;
+                    case ERG: printf("~ "); break;
+                    case REG: printf("^ "); break;
+                    case CREVASSE: printf("C "); break;
+                    default: printf("? "); break;
+                }
+            }
+        }
+        printf("\n");
+    }
+    printf("Robot position: (%d, %d), Orientation: %s\n", loc.pos.x, loc.pos.y,
+           (loc.ori == NORTH) ? "NORTH" : (loc.ori == EAST) ? "EAST" : (loc.ori == SOUTH) ? "SOUTH" : "WEST");
+}
+
+void printCostMap(t_map map) {
+    for (int i = 0; i < map.y_max; i++) {
+        for (int j = 0; j < map.x_max; j++) {
+            if (map.costs[i][j] == COST_UNDEF) {
+                printf("## ");
+            } else {
+                printf("%2d ", map.costs[i][j]);
+            }
+        }
+        printf("\n");
+    }
+}
+
 int main() {
     t_map map;
     t_localisation marc_loc = loc_init(0, 0, NORTH);
@@ -16,6 +51,8 @@ int main() {
 #endif
 
     printf("Map created with dimensions %d x %d\n", map.y_max, map.x_max);
+    printMapWithRobot(map, marc_loc);
+    printCostMap(map);
 
     Node* root = createNode(map.costs[marc_loc.pos.y][marc_loc.pos.x], marc_loc, F_10);
 
@@ -45,6 +82,9 @@ int main() {
     printf("Optimal path:\n");
     for (int i = 0; i < path_length; i++) {
         printf("%s\n", getMoveAsString(path[i]));
+        marc_loc = move(marc_loc, path[i]);
+        printMapWithRobot(map, marc_loc);
+        printCostMap(map);
     }
 
     freeTree(root);
