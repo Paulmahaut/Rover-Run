@@ -12,7 +12,7 @@ t_treeNode* createNode(t_move move, int cost) {
 }
 
 // Première version de la fonction addChild
-/*void addChild(t_treeNode *parent, t_treeNode *child) {
+void addChild(t_treeNode *parent, t_treeNode *child) {
     parent->children = realloc(parent->children, (parent->num_children + 1) * sizeof(t_treeNode *));
     parent->children[parent->num_children] = child;
     parent->num_children++;
@@ -73,7 +73,7 @@ int calculateMoveCost(t_localisation loc, t_move move, t_map map) {
     return _soil_cost[map.soils[new_loc.pos.y][new_loc.pos.x]];
 }
 
-/*void freeTree(t_treeNode *root) {
+void freeTree(t_treeNode *root) {
     if (!root) return;
     for (int i = 0; i < root->num_children; i++) {
         freeTree(root->children[i]);
@@ -81,3 +81,21 @@ int calculateMoveCost(t_localisation loc, t_move move, t_map map) {
     free(root->children);
     free(root);
 }*/
+//---------------------------------------------------------------------------------------------------------------------
+Node* createNode(int cost) {
+    Node* node = (Node*)malloc(sizeof(Node));
+    node->cost = cost;
+    node->children = NULL;
+    node->num_children = 0;
+    return node;
+}
+void print_tree(Node* node, int level) {
+    if (!node) return;
+    for (int i = 0; i < level; i++) {
+        printf("  ");
+    }
+    printf("Cost: %d\n", node->cost);
+    for (int i = 0; i < node->num_children; i++) {
+        print_tree(node->children[i], level + 1);
+    }
+}
