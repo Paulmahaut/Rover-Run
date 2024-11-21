@@ -16,4 +16,4 @@ void addChild(t_treeNode *parent, t_treeNode *child);
 
 void printTree(t_treeNode *node, int level);
 int calculateMoveCost(t_localisation loc, t_move move, t_map map);
-//oid freeTree(t_treeNode *node);
+//oid freeTree(t_treeNode *node);*/

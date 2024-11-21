@@ -301,3 +301,9 @@ void displayMap(t_map map)
     }
     return;
 }
+//----------------------------------------
+void displayMapWithPosition(t_map map, t_localisation loc)
+{
+    displayMap(map);
+    printf("MARC is at position (%d, %d) facing %d\n", loc.pos.x, loc.pos.y, loc.ori);
+}

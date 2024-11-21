@@ -6,6 +6,8 @@
 #define UNTITLED1_MAP_H
 
 #define COST_UNDEF 65535
+
+#include "loc.h"
 /**
  * @brief Enum for the possible soils of the map
  */
@@ -54,5 +56,8 @@ t_map createTrainingMap();
  * @param map : the map to display
  */
 void displayMap(t_map);
+//----------------------------------------
+void displayMapWithPosition(t_map, t_localisation);
+
 
 #endif //UNTITLED1_MAP_H
