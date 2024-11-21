@@ -1,28 +1,25 @@
+// tree.h
+#ifndef TREE_H
+#define TREE_H
+
 #include "map.h"
 #include "moves.h"
 #include "loc.h"
-/*typedef struct s_treeNode {
-    t_move move; // mouvment of the node
-    int cost; //
-    struct s_treeNode **children; // History of travel
-    int num_children; // Number of childs
-    t_localisation loc; // Localisation of the robot
-    t_map map; // Map
-} t_treeNode;
-*/
 
-/*
-t_treeNode* createNode(t_move move, int cost);
-
-void addChild(t_treeNode *parent, t_treeNode *child);
-
-void printTree(t_treeNode *node, int level);
-int calculateMoveCost(t_localisation loc, t_move move, t_map map);
-//oid freeTree(t_treeNode *node);*/
-//---------------------------------------------------------------------------------------------------------------------
 typedef struct Node {
-    int cost;               // Coût de la case atteinte
-    struct Node** children; // Tableau de pointeurs vers les enfants
-    int num_children;       // Nombre d'enfants (dépend du niveau)
+    int cost;               // Cost of the node
+    struct Node** children; // Array of pointers to child nodes
+    int num_children;       // Number of children
+    t_localisation loc;     // Localisation of the robot
+    t_move move;            // Move made to reach this node
+            parent;                 // Parent node
 } Node;
-void print_tree(Node* node, int level);
+
+Node* createNode(int cost, t_localisation loc, t_move move);
+void addChild(Node* parent, Node* child);
+void printTree(Node* node, int level);
+void freeTree(Node* root);
+Node* findMinCostLeaf(Node* root);
+void getOptimalPath(Node* leaf, t_move* path, int* path_length);
+
+#endif // TREE_H

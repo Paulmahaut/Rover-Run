@@ -82,26 +82,69 @@ void freeTree(t_treeNode *root) {
     free(root);
 }*/
 //---------------------------------------------------------------------------------------------------------------------
-Node* createNode(int cost) {
+// tree.c
+#include <stdio.h>
+#include <stdlib.h>
+#include "tree.h"
+
+Node* createNode(int cost, t_localisation loc, t_move move) {
     Node* node = (Node*)malloc(sizeof(Node));
     node->cost = cost;
+    node->loc = loc;
+    node->move = move;
     node->children = NULL;
     node->num_children = 0;
     return node;
 }
-void print_tree(Node* node, int depth) {
-    if (!node) return; // Vérification si le nœud est NULL
 
-    // Indentation pour visualiser les niveaux de l'arbre
-    for (int i = 0; i < depth; i++) {
+void addChild(Node* parent, Node* child) {
+    parent->children = (Node**)realloc(parent->children, (parent->num_children + 1) * sizeof(Node*));
+    parent->children[parent->num_children] = child;
+    parent->num_children++;
+}
+
+void printTree(Node* node, int level) {
+    if (!node) return;
+    for (int i = 0; i < level; i++) {
         printf("  ");
     }
-
-    // Imprimer les informations du nœud
-    printf("Node (Cost: %d, Children: %d)\n", node->cost, node->num_children);
-
-    // Appel récursif pour afficher les enfants
+    printf("Move: %s, Cost: %d\n", getMoveAsString(node->move), node->cost);
     for (int i = 0; i < node->num_children; i++) {
-        print_tree(node->children[i], depth + 1);
+        printTree(node->children[i], level + 1);
+    }
+}
+
+void freeTree(Node* root) {
+    if (!root) return;
+    for (int i = 0; i < root->num_children; i++) {
+        freeTree(root->children[i]);
+    }
+    free(root->children);
+    free(root);
+}
+
+Node* findMinCostLeaf(Node* root) {
+    if (!root) return NULL;
+    Node* minLeaf = root;
+    for (int i = 0; i < root->num_children; i++) {
+        Node* childMinLeaf = findMinCostLeaf(root->children[i]);
+        if (childMinLeaf && childMinLeaf->cost < minLeaf->cost) {
+            minLeaf = childMinLeaf;
+        }
+    }
+    return minLeaf;
+}
+
+void getOptimalPath(Node* leaf, t_move* path, int* path_length) {
+    *path_length = 0;
+    while (leaf) {
+        path[(*path_length)++] = leaf->move;
+        leaf = leaf->parent;
+    }
+    // Reverse the path to get the correct order
+    for (int i = 0; i < *path_length / 2; i++) {
+        t_move temp = path[i];
+        path[i] = path[*path_length - 1 - i];
+        path[*path_length - 1 - i] = temp;
     }
 }
