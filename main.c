@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "map.h"
 
-int main() {
+/*int main() {
     t_map map;
 
     // The following preprocessor directive checks if the code is being compiled on a Windows system.
@@ -32,5 +32,27 @@ int main() {
         printf("\n");
     }
     displayMap(map);
+    return 0;
+}*/
+int main() {
+    t_map map;
+
+#if defined(_WIN32) || defined(_WIN64)
+    map = createMapFromFile("..\\maps\\example1.map");
+#else
+    map = createMapFromFile("../maps/example1.map");
+#endif
+
+    printf("Map created with dimensions %d x %d\n", map.y_max, map.x_max);
+
+    t_localisation marc_loc = loc_init(0, 0, NORTH); // Initial position of MARC
+
+    // Display the map with MARC's initial position
+    displayMap(map, marc_loc);
+
+    // Example of moving MARC and displaying the map again
+    marc_loc = move(marc_loc, F_10);
+    displayMap(map, marc_loc);
+
     return 0;
 }

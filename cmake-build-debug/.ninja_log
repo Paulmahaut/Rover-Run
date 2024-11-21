@@ -1,8 +1,8 @@
 # ninja log v5
-10	145	7539182247637097	CMakeFiles/Rover_Run.dir/moves.c.obj	2d91b240f87039f
-5	155	7539182247687096	CMakeFiles/Rover_Run.dir/loc.c.obj	10e6035f106e04da
-1	158	7539182247717088	CMakeFiles/Rover_Run.dir/main.c.obj	27aad647839078e2
-16	174	7539182248032750	CMakeFiles/Rover_Run.dir/queue.c.obj	d4a5d08485039e50
-27	177	7539182248062769	CMakeFiles/Rover_Run.dir/stack.c.obj	821bf9fb1e5503e4
-21	226	7539182248556530	CMakeFiles/Rover_Run.dir/map.c.obj	29710c05be8e5bf2
-226	382	7539182250090990	Rover_Run.exe	8179969407904836
+21	161	7539186737944118	CMakeFiles/Rover_Run.dir/moves.c.obj	2d91b240f87039f
+3	133	7539186737653088	CMakeFiles/Rover_Run.dir/loc.c.obj	10e6035f106e04da
+32	183	7539186738185401	CMakeFiles/Rover_Run.dir/stack.c.obj	821bf9fb1e5503e4
+9	166	7539186737979864	CMakeFiles/Rover_Run.dir/main.c.obj	27aad647839078e2
+212	330	7539186739516199	Rover_Run.exe	8179969407904836
+14	170	7539186738034865	CMakeFiles/Rover_Run.dir/queue.c.obj	d4a5d08485039e50
+26	212	7539186738488777	CMakeFiles/Rover_Run.dir/map.c.obj	29710c05be8e5bf2
