@@ -305,5 +305,6 @@ void displayMap(t_map map)
 void displayMapWithPosition(t_map map, t_localisation loc)
 {
     displayMap(map);
-    printf("MARC is at position (%d, %d) facing %d\n", loc.pos.x, loc.pos.y, loc.ori);
+    //printf("MARC is at position (%d, %d) facing %d\n", loc.pos.x, loc.pos.y, loc.ori);
+    printf("MARC is at position (%d, %d) facing %s\n", loc.pos.x, loc.pos.y, (loc.ori == NORTH) ? "NORTH" : (loc.ori == EAST) ? "EAST" : (loc.ori == SOUTH) ? "SOUTH" : "WEST");
 }
