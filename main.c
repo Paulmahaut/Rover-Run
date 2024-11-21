@@ -40,29 +40,8 @@ int main() {
     //move Marc to the right
     marc_loc = move(marc_loc, T_RIGHT);
     displayMapWithPosition(map, marc_loc);
-    return 0;
+    //---------------------------------------------------------------------------------------------------------------------
 
-    // Création d'un arbre simple pour tester
-    Node* root = (Node*)malloc(sizeof(Node));
-    root->cost = 10;
-    root->num_children = 2;
-    root->children = (Node**)malloc(root->num_children * sizeof(Node*));
 
-    Node* child1 = (Node*)malloc(sizeof(Node));
-    child1->cost = 20;
-    child1->num_children = 0;
-    child1->children = NULL;
 
-    Node* child2 = (Node*)malloc(sizeof(Node));
-    child2->cost = 15;
-    child2->num_children = 0;
-    child2->children = NULL;
 
-    root->children[0] = child1;
-    root->children[1] = child2;
-
-    // Afficher l'arbre
-    printf("Arbre :\n");
-    print_tree(root, 0);
-
-}

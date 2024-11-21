@@ -89,13 +89,19 @@ Node* createNode(int cost) {
     node->num_children = 0;
     return node;
 }
-void print_tree(Node* node, int level) {
-    if (!node) return;
-    for (int i = 0; i < level; i++) {
+void print_tree(Node* node, int depth) {
+    if (!node) return; // Vérification si le nœud est NULL
+
+    // Indentation pour visualiser les niveaux de l'arbre
+    for (int i = 0; i < depth; i++) {
         printf("  ");
     }
-    printf("Cost: %d\n", node->cost);
+
+    // Imprimer les informations du nœud
+    printf("Node (Cost: %d, Children: %d)\n", node->cost, node->num_children);
+
+    // Appel récursif pour afficher les enfants
     for (int i = 0; i < node->num_children; i++) {
-        print_tree(node->children[i], level + 1);
+        print_tree(node->children[i], depth + 1);
     }
 }

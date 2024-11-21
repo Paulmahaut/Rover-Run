@@ -25,4 +25,4 @@ typedef struct Node {
     struct Node** children; // Tableau de pointeurs vers les enfants
     int num_children;       // Nombre d'enfants (dépend du niveau)
 } Node;
-void printTree(Node* node, int level);
+void print_tree(Node* node, int level);
