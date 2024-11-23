@@ -308,3 +308,38 @@ void displayMapWithPosition(t_map map, t_localisation loc)
     //printf("MARC is at position (%d, %d) facing %d\n", loc.pos.x, loc.pos.y, loc.ori);
     printf("MARC is at position (%d, %d) facing %s\n", loc.pos.x, loc.pos.y, (loc.ori == NORTH) ? "NORTH" : (loc.ori == EAST) ? "EAST" : (loc.ori == SOUTH) ? "SOUTH" : "WEST");
 }
+
+void printMapWithRobot(t_map map, t_localisation loc) {
+    for (int i = 0; i < map.y_max; i++) {
+        for (int j = 0; j < map.x_max; j++) {
+            if (i == loc.pos.y && j == loc.pos.x) {
+                printf("R ");
+            } else {
+                switch (map.soils[i][j]) {
+                    case BASE_STATION: printf("B "); break;
+                    case PLAIN: printf(". "); break;
+                    case ERG: printf("~ "); break;
+                    case REG: printf("^ "); break;
+                    case CREVASSE: printf("C "); break;
+                    default: printf("? "); break;
+                }
+            }
+        }
+        printf("\n");
+    }
+    printf("Robot position: (%d, %d), Orientation: %s\n", loc.pos.x, loc.pos.y,
+           (loc.ori == NORTH) ? "NORTH" : (loc.ori == EAST) ? "EAST" : (loc.ori == SOUTH) ? "SOUTH" : "WEST");
+}
+
+void printCostMap(t_map map) {
+    for (int i = 0; i < map.y_max; i++) {
+        for (int j = 0; j < map.x_max; j++) {
+            if (map.costs[i][j] == COST_UNDEF) {
+                printf("## ");
+            } else {
+                printf("%2d ", map.costs[i][j]);
+            }
+        }
+        printf("\n");
+    }
+}

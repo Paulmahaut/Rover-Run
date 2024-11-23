@@ -59,5 +59,8 @@ void displayMap(t_map);
 //----------------------------------------
 void displayMapWithPosition(t_map, t_localisation);
 
+void printMapWithRobot(t_map map, t_localisation loc);
+
+void printCostMap(t_map map);
 
 #endif //UNTITLED1_MAP_H
