@@ -45,6 +45,27 @@ typedef struct s_map
 t_map createMapFromFile(char *);
 
 /**
+ * @brief :  function to get the position of the base station
+ * @param map : the map
+ * @return : the position of the base station
+ */
+t_position getBaseStationPosition(t_map);
+
+/**
+ * @brief : function to calculate costs of the map  from the base station
+ * @param map : the map
+ * @return none
+ */
+void calculateCosts(t_map);
+
+/**
+ * @brief : function to remove 'false' crevasses costs from the costs array
+ * @param map : the map
+ * @return none
+ */
+void removeFalseCrevasses(t_map);
+
+/**
  * @brief Function to create a standard training map (11x11 with only plains and base station in the middle)
  * @param none
  * @return a standard map

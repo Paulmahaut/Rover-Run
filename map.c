@@ -12,27 +12,6 @@
 /* prototypes of local functions */
 /* local functions are used only in this file, as helper functions */
 
-/**
- * @brief :  function to get the position of the base station
- * @param map : the map
- * @return : the position of the base station
- */
-t_position getBaseStationPosition(t_map);
-
-/**
- * @brief : function to calculate costs of the map  from the base station
- * @param map : the map
- * @return none
- */
-void calculateCosts(t_map);
-
-/**
- * @brief : function to remove 'false' crevasses costs from the costs array
- * @param map : the map
- * @return none
- */
-void removeFalseCrevasses(t_map);
-
 /* definition of local functions */
 
 t_position getBaseStationPosition(t_map map)
@@ -247,17 +226,16 @@ t_map createMapFromFile(char *filename)
     return map;
 }
 
-t_map createTrainingMap()
+/*t_map createTrainingMap()
 {
     return createMapFromFile("..\\maps\\training.map");
-}
+}*/
 
-void displayMap(t_map map)
+/*void displayMap(t_map map)
 {
-    /** the rules for display are :
-     * display all soils with 3x3 characters
-     * characters are : B for base station, '-' for plain, '~' for erg, '^' for reg, ' ' for crevasse
-     */
+    // the rules for display are :
+    //display all soils with 3x3 characters
+    //characters are : B for base station, '-' for plain, '~' for erg, '^' for reg, ' ' for crevasse
     for (int i = 0; i < map.y_max; i++)
     {
         for (int rep = 0; rep < 3; rep++)
@@ -300,14 +278,16 @@ void displayMap(t_map map)
 
     }
     return;
-}
+}*/
+
 //----------------------------------------
+/*
 void displayMapWithPosition(t_map map, t_localisation loc)
 {
     displayMap(map);
     //printf("MARC is at position (%d, %d) facing %d\n", loc.pos.x, loc.pos.y, loc.ori);
     printf("MARC is at position (%d, %d) facing %s\n", loc.pos.x, loc.pos.y, (loc.ori == NORTH) ? "NORTH" : (loc.ori == EAST) ? "EAST" : (loc.ori == SOUTH) ? "SOUTH" : "WEST");
-}
+}*/
 
 void printMapWithRobot(t_map map, t_localisation loc) {
     for (int i = 0; i < map.y_max; i++) {

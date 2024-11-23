@@ -28,6 +28,22 @@ typedef enum e_move
 } t_move;
 
 /**
+ * @brief Function to rotate the robot according to a move and its actual orientation
+ * @param ori : the actual orientation of the robot
+ * @param move : the move to do
+ * @return the new orientation of the robot
+ */
+t_orientation rotate(t_orientation, t_move );
+
+/**
+ * @brief function to translate the robot according to a move and its actual position
+ * @param loc : the actual localisation of the robot
+ * @param move : the move to do
+ * @return the new localisation of the robot
+ */
+t_localisation translate(t_localisation , t_move);
+
+/**
  * @brief function to get a t_move as a string
  * @param move : the move to convert
  * @return the string corresponding to the move
