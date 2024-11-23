@@ -11,6 +11,7 @@ int main() {
     t_map map;
     t_localisation marc_loc = loc_init(0, 0, NORTH);
 
+    // Load the map from the file
 #if defined(_WIN32) || defined(_WIN64)
     map = createMapFromFile("..\\maps\\example1.map");
 #else
@@ -18,42 +19,45 @@ int main() {
 #endif
 
     printf("Map created with dimensions %d x %d\n", map.y_max, map.x_max);
+
+    t_localisation marc_loc = loc_init(0, 0, NORTH); // Initialize MARC's position and orientation
+
+    // Find the base station location and print initial state
+    t_position base_position = getBaseStationPosition(map);
     printMapWithRobot(map, marc_loc);
-    printCostMap(map);
 
-    Node* root = createNode(map.costs[marc_loc.pos.y][marc_loc.pos.x], marc_loc, F_10);
-
-    for (int i = 0; i < 9; i++) {
-        t_move move1 = (t_move)i;
-        t_localisation loc1 = move(marc_loc, move1);
-        if (loc1.pos.x < 0 || loc1.pos.x >= map.x_max || loc1.pos.y < 0 || loc1.pos.y >= map.y_max) continue;
-        int cost1 = map.costs[loc1.pos.y][loc1.pos.x];
-        Node* child1 = createNode(cost1, loc1, move1);
-        addChild(root, child1);
-
-        for (int j = 0; j < 8; j++) {
-            t_move move2 = (t_move)j;
-            t_localisation loc2 = move(loc1, move2);
-            if (loc2.pos.x < 0 || loc2.pos.x >= map.x_max || loc2.pos.y < 0 || loc2.pos.y >= map.y_max) continue;
-            int cost2 = map.costs[loc2.pos.y][loc2.pos.x];
-            Node* child2 = createNode(cost2, loc2, move2);
-            addChild(child1, child2);
+    // Create a tree for optimal pathfinding
+    Node *root = createNode(0, marc_loc, F_10); // Cost starts at 0, and initial move is a placeholder
+    for (int i = 0; i < 7; i++) { // 7 possible moves
+        t_localisation new_loc = move(marc_loc, (t_move)i);
+        if (isValidLocalisation(new_loc.pos, map.x_max, map.y_max)) {
+            int cost = _soil_cost[map.soils[new_loc.pos.y][new_loc.pos.x]];
+            Node *child = createNode(cost, new_loc, (t_move)i);
+            addChild(root, child);
         }
     }
 
-    Node* minLeaf = findMinCostLeaf(root);
-    t_move path[5];
-    int path_length;
-    getOptimalPath(minLeaf, path, &path_length);
+    // Find the minimum-cost path
+    Node *optimal_leaf = findMinCostLeaf(root);
+    t_move path[5]; // Array to hold the optimal path
+    int path_length = 0;
+    getOptimalPath(optimal_leaf, path, &path_length);
 
-    printf("Optimal path:\n");
-    for (int i = 0; i < path_length; i++) {
-        printf("%s\n", getMoveAsString(path[i]));
+    // Execute 5 moves from the optimal path
+    printf("\nExecuting 5 optimal moves:\n");
+    for (int i = 0; i < 5 && i < path_length; i++) {
         marc_loc = move(marc_loc, path[i]);
+        printf("Move %d: %s\n", i + 1, getMoveAsString(path[i]));
         printMapWithRobot(map, marc_loc);
-        printCostMap(map);
+
+        // Stop if MARC reaches the base station
+        if (marc_loc.pos.x == base_position.x && marc_loc.pos.y == base_position.y) {
+            printf("MARC has reached the base station!\n");
+            break;
+        }
     }
 
+    // Clean up
     freeTree(root);
     return 0;
 }
