@@ -1,5 +1,9 @@
 #include "moves.h"
 #include "map.h"
+#include <stdlib.h>
+
+
+#define NUM_MOVES 9
 
 t_orientation rotate(t_orientation ori, t_move move) {
     int rst;
@@ -141,4 +145,18 @@ t_localisation locmove(t_localisation loc, t_move move, t_map map) {
 
 char *getMoveAsString(t_move move) {
     return _moves[move];
+}
+
+
+// Function to randomly select 9 moves based on their availability
+void selectRandomMoves(t_move *selected_moves) {
+    int availability[7] = {22, 15, 7, 7, 21, 21, 7};
+    for (int i = 0; i < NUM_MOVES; i++) {
+        int move;
+        do {
+            move = rand() % 7;
+        } while (availability[move] == 0);
+        selected_moves[i] = (t_move)move;
+        availability[move]--;
+    }
 }

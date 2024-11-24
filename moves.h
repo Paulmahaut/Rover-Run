@@ -67,4 +67,6 @@ t_localisation move(t_localisation, t_move);
 void updateLocalisation(t_localisation *, t_move);
 
 t_localisation locmove(t_localisation, t_move, t_map);
+
+void selectRandomMoves(t_move *selected_moves);
 #endif //UNTITLED1_MOVES_H
