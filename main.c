@@ -7,6 +7,7 @@
 #include "loc.h"
 
 #define NUM_MOVES 9
+#define PHASE_MOVES 5
 
 // Function to randomly select 9 moves based on their availability
 void selectRandomMoves(t_move *selected_moves) {
@@ -25,7 +26,7 @@ int main() {
     srand(time(NULL)); // Initialize random seed
 
     t_map map;
-    t_localisation marc_loc = loc_init(0, 5, NORTH);
+    t_localisation marc_loc = loc_init(8, 5, NORTH);
 
 #if defined(_WIN32) || defined(_WIN64)
     map = createMapFromFile("..\\maps\\example1.map");
@@ -45,7 +46,7 @@ int main() {
             printf("%s\n", getMoveAsString(selected_moves[i]));
         }
 
-        for (int i = 0; i < NUM_MOVES; i++) {
+        for (int i = 0; i < PHASE_MOVES; i++) {
             t_localisation best_loc = marc_loc;
             int min_cost = COST_UNDEF;
             t_move best_move = selected_moves[i];
