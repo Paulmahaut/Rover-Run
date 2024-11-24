@@ -16,7 +16,7 @@ void DisplayMenu() {
     printf("2. 2nd map of dim 8x8\n");
     printf("3. Calculate the complexity\n");
     printf("4. Quit\n");
-    printf("Choose an Option (between 1&3): ");
+    printf("Choose an Option (between 1&4): ");
 }
 
 int main() {

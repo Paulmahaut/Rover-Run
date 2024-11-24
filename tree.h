@@ -20,5 +20,6 @@ void printTree(Node* node, int level);
 void freeTree(Node* root);
 Node* findMinCostLeaf(Node* root);
 void getOptimalPath(Node* leaf, t_move* path, int* path_length);
+void buildTree(Node* root, int depth, t_map map, int max_depth);
 
 #endif // TREE_H
