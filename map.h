@@ -66,22 +66,10 @@ void calculateCosts(t_map);
 void removeFalseCrevasses(t_map);
 
 /**
- * @brief Function to create a standard training map (11x11 with only plains and base station in the middle)
- * @param none
- * @return a standard map
+ * @brief : Function to display the cost map for a given Mars map
+ * @param map : The map structure containing terrain costs and dimensions
+ * @return none
  */
-t_map createTrainingMap();
-
-/**
- * @brief display the map with characters
- * @param map : the map to display
- */
-void displayMap(t_map);
-//----------------------------------------
-void displayMapWithPosition(t_map, t_localisation);
-
-void printMapWithRobot(t_map map, t_localisation loc);
-
 void printCostMap(t_map map);
 
 #endif //UNTITLED1_MAP_H

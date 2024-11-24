@@ -51,22 +51,18 @@ t_localisation translate(t_localisation , t_move);
 char *getMoveAsString(t_move move);
 
 /**
- * @brief function to update the localisation of the robot according to a move
- * @param loc : the localisation of the robot
- * @param move : the move to do
- * @return the new localisation of the robot
+ * @brief : Function to calculate the new localisation of MARC after a movement
+ * @param loc : The current localisation of MARC
+ * @param move : The move to be performed (e.g., forward, turn)
+ * @param map : The map structure containing terrain information
+ * @return The updated localisation of MARC after applying the move and terrain effects
  */
-t_localisation move(t_localisation, t_move);
-
-/**
- * @brief wrapper function to update a single location
- * @param p_loc : the pointer to the localisation of the robot
- * @param move : the move to do
- * @return none
- */
-void updateLocalisation(t_localisation *, t_move);
-
 t_localisation locmove(t_localisation, t_move, t_map);
 
+/**
+ * @brief : Function to randomly select a sequence of moves for MARC
+ * @param selected_moves : Pointer to an array where the selected moves will be stored
+ * @return none
+ */
 void selectRandomMoves(t_move *selected_moves);
 #endif //UNTITLED1_MOVES_H

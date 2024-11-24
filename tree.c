@@ -38,8 +38,8 @@ void buildTree(Node* root, int depth, t_map map, int max_depth) {
                 continue;
             }
             Node* child = createNode(new_cost, new_loc, (t_move)i); // Create a node for the current move
-            addChild(root, child); //Create a child of the newly created node
-            buildTree(child, depth + 1, map, max_depth); //Use the child created to make the next part of tree
+            addChild(root, child); // Create a child of the newly created node
+            buildTree(child, depth + 1, map, max_depth); // Use the child created to make the next part of tree
         }
     }
 }
@@ -67,8 +67,11 @@ void freeTree(Node* root) {
 Node* findMinCostLeaf(Node* root) {
     if (!root) return NULL;
     Node* minLeaf = root;
+    // Iterate over all children of the current node
     for (int i = 0; i < root->num_children; i++) {
         Node* childMinLeaf = findMinCostLeaf(root->children[i]);
+
+        // If the child has a lower cost than the current minimum then get the new minimum leaf
         if (childMinLeaf && childMinLeaf->cost < minLeaf->cost) {
             minLeaf = childMinLeaf;
         }
@@ -78,12 +81,14 @@ Node* findMinCostLeaf(Node* root) {
 
 void getOptimalPath(Node* leaf, t_move* path, int* path_length) {
     *path_length = 0;
+    // Traverse from leaf to root, storing the moves to know what MARC will need to do
     while (leaf) {
-        path[(*path_length)++] = leaf->move;
+        path[(*path_length)++] = leaf->move; // Store the move at the current depth
         leaf = leaf->parent;
     }
+    // Reverse the path to get the correct order in root to leaf instead of leaf to root like had at first
     for (int i = 0; i < *path_length / 2; i++) {
-        t_move temp = path[i];
+        t_move temp = path[i];  // Swap elements
         path[i] = path[*path_length - 1 - i];
         path[*path_length - 1 - i] = temp;
     }

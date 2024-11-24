@@ -34,7 +34,7 @@ t_position getBaseStationPosition(t_map map)
         }
         i++;
     }
-    // if the base station is not found, we exit the program
+    // If the base station is not found, we exit the program
     if (!found)
     {
         fprintf(stderr, "Error: base station not found in the map\n");
@@ -45,7 +45,7 @@ t_position getBaseStationPosition(t_map map)
 
 void removeFalseCrevasses(t_map map)
 {
-    // step 1 : find the minimal cost > 10000 in the costs array where the soil is not a crevasse
+    // Step 1 : find the minimal cost > 10000 in the costs array where the soil is not a crevasse
     int over=0;
     int imin, jmin;
     while (!over)
@@ -67,7 +67,7 @@ void removeFalseCrevasses(t_map map)
         }
         if (imin < map.y_max && jmin < map.x_max)
         {
-            // step 2 : calculate the costs of the neighbours of the position
+            // Step 2 : calculate the costs of the neighbours of the position
             t_position pos;
             pos.x = jmin;
             pos.y = imin;
@@ -106,24 +106,24 @@ void removeFalseCrevasses(t_map map)
 void calculateCosts(t_map map)
 {
     t_position baseStation = getBaseStationPosition(map);
-    //create a queue to store the positions to visit
+    // Create a queue to store the positions to visit
     t_queue queue = createQueue(map.x_max * map.y_max);
-    //enqueue the base station
+    // Enqueue the base station
     enqueue(&queue, baseStation);
-    // while the queue is not empty
+    // While the queue is not empty
     while (queue.first != queue.last)
     {
-        // dequeue the position
+        // Dequeue the position
         t_position pos = dequeue(&queue);
-        // get its self cost
+        // Get its self cost
         int self_cost = _soil_cost[map.soils[pos.y][pos.x]];
-        // get ts neighbours
+        // Get ts neighbours
         t_position lp, rp, up, dp;
         lp = LEFT(pos);
         rp = RIGHT(pos);
         up = UP(pos);
         dp = DOWN(pos);
-        // get the mimimum cost of the neighbours
+        // Get the minimum cost of the neighbours
         int min_cost = COST_UNDEF;
         if (isValidLocalisation(lp, map.x_max, map.y_max))
         {
@@ -141,12 +141,12 @@ void calculateCosts(t_map map)
         {
             min_cost = (map.costs[dp.y][dp.x] < min_cost) ? map.costs[dp.y][dp.x] : min_cost;
         }
-        // the cost of the current position is the minimum cost of the neighbours + 1 or 0 if the soil is a base station
+        // The cost of the current position is the minimum cost of the neighbours + 1 or 0 if the soil is a base station
         map.costs[pos.y][pos.x] = (map.soils[pos.y][pos.x] == BASE_STATION) ? 0 : min_cost + self_cost;
-        // enqueue the neighbours if they are not visited yet
+        // Enqueue the neighbours if they are not visited yet
         if (isValidLocalisation(lp, map.x_max, map.y_max) && map.costs[lp.y][lp.x] == COST_UNDEF)
         {
-            // mark as visited - change the cost to 65534
+            // Mark as visited - change the cost to 65534
             map.costs[lp.y][lp.x] = COST_UNDEF-1;
             enqueue(&queue, lp);
         }
@@ -182,8 +182,8 @@ t_map createMapFromFile(char *filename)
      */
 
     t_map map;
-    int xdim, ydim;     // dimensions of the map
-    char buffer[100];   // buffer for reading the file line by line
+    int xdim, ydim; // Dimensions of the map
+    char buffer[100]; // Buffer for reading the file line by line
 
     FILE *file = fopen(filename,"rt");
     if (file == NULL)
@@ -208,8 +208,8 @@ t_map createMapFromFile(char *filename)
     for (int i = 0; i < ydim; i++)
     {
 
-        // parse the line to get the values : 0 = BASE_STATION, 1 = PLAIN, 2 = ERG, 3 = REG, 4 = CREVASSE
-        // values are separated by spaces, so we use sscanf with %d to get the values
+        // Parse the line to get the values : 0 = BASE_STATION, 1 = PLAIN, 2 = ERG, 3 = REG, 4 = CREVASSE
+        // Values are separated by spaces, so we use sscanf with %d to get the values
         for (int j = 0; j < xdim; j++)
         {
             int value;
@@ -224,91 +224,6 @@ t_map createMapFromFile(char *filename)
     calculateCosts(map);
     removeFalseCrevasses(map);
     return map;
-}
-
-/*t_map createTrainingMap()
-{
-    return createMapFromFile("..\\maps\\training.map");
-}*/
-
-/*void displayMap(t_map map)
-{
-    // the rules for display are :
-    //display all soils with 3x3 characters
-    //characters are : B for base station, '-' for plain, '~' for erg, '^' for reg, ' ' for crevasse
-    for (int i = 0; i < map.y_max; i++)
-    {
-        for (int rep = 0; rep < 3; rep++)
-        {
-            for (int j = 0; j < map.x_max; j++)
-            {
-                char c[4];
-                switch (map.soils[i][j])
-                {
-                    case BASE_STATION:
-                        if (rep==1)
-                        {
-                            strcpy(c, " B ");
-                        }
-                        else
-                        {
-                            strcpy(c, "   ");
-                        }
-                        break;
-                    case PLAIN:
-                        strcpy(c, "---");
-                        break;
-                    case ERG:
-                        strcpy(c, "~~~");
-                        break;
-                    case REG:
-                        strcpy(c, "^^^");
-                        break;
-                    case CREVASSE:
-                        sprintf(c, "%c%c%c",219,219,219);
-                        break;
-                    default:
-                        strcpy(c, "???");
-                        break;
-                }
-                printf("%s", c);
-            }
-            printf("\n");
-        }
-
-    }
-    return;
-}*/
-
-//----------------------------------------
-/*
-void displayMapWithPosition(t_map map, t_localisation loc)
-{
-    displayMap(map);
-    //printf("MARC is at position (%d, %d) facing %d\n", loc.pos.x, loc.pos.y, loc.ori);
-    printf("MARC is at position (%d, %d) facing %s\n", loc.pos.x, loc.pos.y, (loc.ori == NORTH) ? "NORTH" : (loc.ori == EAST) ? "EAST" : (loc.ori == SOUTH) ? "SOUTH" : "WEST");
-}*/
-
-void printMapWithRobot(t_map map, t_localisation loc) {
-    for (int i = 0; i < map.y_max; i++) {
-        for (int j = 0; j < map.x_max; j++) {
-            if (i == loc.pos.y && j == loc.pos.x) {
-                printf("R ");
-            } else {
-                switch (map.soils[i][j]) {
-                    case BASE_STATION: printf("B "); break;
-                    case PLAIN: printf(". "); break;
-                    case ERG: printf("~ "); break;
-                    case REG: printf("^ "); break;
-                    case CREVASSE: printf("C "); break;
-                    default: printf("? "); break;
-                }
-            }
-        }
-        printf("\n");
-    }
-    printf("Robot position: (%d, %d), Orientation: %s\n", loc.pos.x, loc.pos.y,
-           (loc.ori == NORTH) ? "NORTH" : (loc.ori == EAST) ? "EAST" : (loc.ori == SOUTH) ? "SOUTH" : "WEST");
 }
 
 void printCostMap(t_map map) {

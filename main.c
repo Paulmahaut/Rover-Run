@@ -182,8 +182,8 @@ int main() {
                 buildTree(root, 0, map3, PHASE_MOVES);
                 end = clock();
                 printf("Tree construction time: %.2f ms\n", (double)(end - start) * 1000 / CLOCKS_PER_SEC);
-                printf("Time complexity: O(9^n)\n"); //It creates the tree of n depth with the 9 possible moves,
-                // so if we chose 5 moves, it will be 9^5
+                printf("Time complexity: O(9^n)\n"); // It creates the tree of n depth with the 9 possible moves,
+                                                     // so if we chose 5 moves, it will be 9^5
 
                 // Complexity of the Leaf search phase
                 start = clock();
@@ -199,7 +199,7 @@ int main() {
                 getOptimalPath(minLeaf, path, &path_length);
                 end = clock();
                 printf("Path calculation time: %.2f ms\n", (double)(end - start) * 1000 / CLOCKS_PER_SEC);
-                printf("Time complexity: O(n)\n"); //Since you go across the only path that is correct, you do it once so it's n complexity
+                printf("Time complexity: O(n)\n"); // Since you go across the only path that is correct, you do it once so it's n complexity
 
                 // Guiding MARC phase
                 start = clock();
@@ -213,7 +213,7 @@ int main() {
                 }
                 end = clock();
                 printf("Complete guidance time: %.2f ms\n", (double)(end - start) * 1000 / CLOCKS_PER_SEC);
-                printf("Time complexity: O(n)\n"); //Since MARC follows the optimal path, it also goes only once so it's n complexity
+                printf("Time complexity: O(n)\n"); // Since MARC follows the optimal path, it also goes only once so it's n complexity
 
                 return 0;
             case 4:
