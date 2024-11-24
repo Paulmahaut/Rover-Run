@@ -44,10 +44,10 @@ int main() {
                 t_localisation marc_loc1 = loc_init(8, 5, NORTH);
 
 #if defined(_WIN32) || defined(_WIN64)
-                map1 = createMapFromFile("..\\maps\\example1.map1");
+                map1 = createMapFromFile("..\\maps\\example1.map");
 
 #else
-                map1 = createMapFromFile("../maps/example1.map1");
+                map1 = createMapFromFile("../maps/example1.map");
 #endif
 
                 printf("Map created with dimensions %d x %d\n", map1.y_max, map1.x_max);
@@ -109,15 +109,15 @@ int main() {
                 srand(time(NULL)); // Initialize random seed
 
                 t_map map2;
-                t_localisation marc_loc2 = loc_init(8, 5, NORTH);
+                t_localisation marc_loc2 = loc_init(1, 5, NORTH);
 
 #if defined(_WIN32) || defined(_WIN64)
-                map2 = createMapFromFile("..\\maps\\example2.map2");
+                map2 = createMapFromFile("..\\maps\\example2.map");
 
 
 #else
 
-                map2 = createMapFromFile("../maps/example2.map2");
+                map2 = createMapFromFile("../maps/example2.map");
 #endif
 
                 printf("Map created with dimensions %d x %d\n", map2.y_max, map2.x_max);
