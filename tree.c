@@ -28,6 +28,22 @@ void addChild(Node* parent, Node* child) {
     child->parent = parent;
 }
 
+void buildTree(Node* root, int depth, t_map map, int max_depth) {
+    if (depth >= max_depth) return;
+    for (int i = 0; i < 9; i++) { // Iterate over all possible 9 moves from the enum
+        t_localisation new_loc = locmove(root->loc, (t_move)i, map);
+        if (isValidLocalisation(new_loc.pos, map.x_max, map.y_max)) { // Check if the move puts MARC in the map or not
+            int new_cost = map.costs[new_loc.pos.y][new_loc.pos.x];
+            if (new_cost == COST_UNDEF || new_cost >= 10000) {
+                continue;
+            }
+            Node* child = createNode(new_cost, new_loc, (t_move)i); // Create a node for the current move
+            addChild(root, child); //Create a child of the newly created node
+            buildTree(child, depth + 1, map, max_depth); //Use the child created to make the next part of tree
+        }
+    }
+}
+
 void printTree(Node* node, int level) {
     if (!node) return;
     for (int i = 0; i < level; i++) {

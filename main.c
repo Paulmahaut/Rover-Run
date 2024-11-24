@@ -24,10 +24,10 @@ void selectRandomMoves(t_move *selected_moves) {
 
 void afficherMenu() {
     printf("Menu:\n");
-    printf("1. 1st map of dim 10x10\n");
-    printf("2. 2nd map of dim 8x8\n");
-    printf("3. Quit\n");
-    printf("Choose an Option (between 1&3): ");
+    printf("1. Option 1 : MARC is on map 1\n");
+    printf("2. Option 2 : MARC is on map 2\n");
+    printf("3. Option 3 : Calculate the complexity\n");
+    printf("Choisissez une option: ");
 }
 
 int main() {
@@ -37,19 +37,16 @@ int main() {
         scanf("%d", &choix);
         switch (choix) {
             case 1:
-                printf("You choose 1st map\n");
+                printf("Vous avez choisi l'option 1\n");
                 srand(time(NULL)); // Initialize random seed
-
                 t_map map1;
                 t_localisation marc_loc1 = loc_init(8, 5, NORTH);
 
 #if defined(_WIN32) || defined(_WIN64)
                 map1 = createMapFromFile("..\\maps\\example1.map");
-
 #else
                 map1 = createMapFromFile("../maps/example1.map");
 #endif
-
                 printf("Map created with dimensions %d x %d\n", map1.y_max, map1.x_max);
                 printCostMap(map1);
 
@@ -105,7 +102,7 @@ int main() {
                 printCostMap(map1);
                 return 0;
             case 2:
-                printf("You choose the 2nd map\n");
+                printf("Vous avez choisi l'option 2\n");
                 srand(time(NULL)); // Initialize random seed
 
                 t_map map2;
@@ -113,13 +110,9 @@ int main() {
 
 #if defined(_WIN32) || defined(_WIN64)
                 map2 = createMapFromFile("..\\maps\\example2.map");
-
-
 #else
-
                 map2 = createMapFromFile("../maps/example2.map");
 #endif
-
                 printf("Map created with dimensions %d x %d\n", map2.y_max, map2.x_max);
                 printCostMap(map2);
 
@@ -175,11 +168,65 @@ int main() {
                 printCostMap(map2);
                 return 0;
             case 3:
-                printf("Goodbye!\n");
+                printf("You chose to calculate the complexity\n");
+                srand(time(NULL)); // Initialize random seed
+                t_map map3;
+                t_localisation marc_loc3 = loc_init(8, 5, NORTH);
+
+#if defined(_WIN32) || defined(_WIN64)
+                map3 = createMapFromFile("..\\maps\\example2.map");
+#else
+                map3 = createMapFromFile("../maps/example2.map");
+#endif
+                printf("Map created with dimensions %d x %d\n", map3.y_max, map3.x_max);
+                clock_t start, end;
+
+                // Complexity of the Tree construction phase
+                start = clock();
+                Node* root = createNode(map3.costs[marc_loc3.pos.y][marc_loc3.pos.x], marc_loc3, F_10);
+                buildTree(root, 0, map3, PHASE_MOVES);
+                end = clock();
+                printf("Tree construction time: %.2f ms\n", (double)(end - start) * 1000 / CLOCKS_PER_SEC);
+                printf("Time complexity: O(9^n)\n"); //It creates the tree of n depth with the 9 possible moves,
+                // so if we chose 5 moves, it will be 9^5
+
+                // Complexity of the Leaf search phase
+                start = clock();
+                Node* minLeaf = findMinCostLeaf(root);
+                end = clock();
+                printf("Leaf search time: %.2f ms\n", (double)(end - start) * 1000 / CLOCKS_PER_SEC);
+                printf("Time complexity: O(9^n)\n"); //It's this much because findMinCostLeaf goes through all the nodes of the tree of depth n that has 9 moves
+
+                // Complexity of the Path calculation phase
+                start = clock();
+                t_move path[PHASE_MOVES];
+                int path_length;
+                getOptimalPath(minLeaf, path, &path_length);
+                end = clock();
+                printf("Path calculation time: %.2f ms\n", (double)(end - start) * 1000 / CLOCKS_PER_SEC);
+                printf("Time complexity: O(n)\n"); //Since you go across the only path that is correct, you do it once so it's n complexity
+
+                // Guiding MARC phase
+                start = clock();
+                t_localisation marc_loc4 = marc_loc3;
+                for (int i = 0; i < path_length; i++) {
+                    marc_loc4 = locmove(marc_loc4, path[i], map3);
+                    if (map3.soils[marc_loc4.pos.y][marc_loc4.pos.x] == BASE_STATION) {
+                        printf("Robot reached base station.\n");
+                        break;
+                    }
+                }
+                end = clock();
+                printf("Complete guidance time: %.2f ms\n", (double)(end - start) * 1000 / CLOCKS_PER_SEC);
+                printf("Time complexity: O(n)\n"); //Since MARC follows the optimal path, it also goes only once so it's n complexity
+
+                return 0;
+            case 4:
+                printf("Au revoir!\n");
                 break;
             default:
-                printf("Invalid Option, Please Try Again.\n");
+                printf("Option invalide, veuillez réessayer.\n");
         }
-    } while (choix != 3);
+    } while (choix != 4);
     return 0;
 }
