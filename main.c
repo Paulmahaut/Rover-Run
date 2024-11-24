@@ -9,7 +9,12 @@
 
 int main() {
     t_map map;
-    t_localisation marc_loc = loc_init(0, 0, NORTH);
+    int a,b;
+    printf("Enter the coordinate x of the robot: ");
+    scanf("%d", &a);
+    printf("Enter the coordinate y of the robot: ");
+    scanf("%d", &b);
+    t_localisation marc_loc = loc_init(a, b, NORTH);
 
 #if defined(_WIN32) || defined(_WIN64)
     map = createMapFromFile("..\\maps\\example1.map");
