@@ -1,7 +1,13 @@
-# Rover-Run
+# ROVER RUN !
 School project full in C
 
-valeur = mouvements
+## CONTEXT
+
+A rover land on Mars and have to find the base station 
+
+## TECHNICAL PART 
+
+1.
 
 We are going to use an array to stock the different movements 
 
@@ -11,6 +17,7 @@ Pour le prochain niveau on aura un array contenant toutes les valeurs sauf la va
 
 ET on aura une file contenant la valeur du mouvement choisi
   (ce qui nous permet d'avoir le chemin root->leaf)
+
 
 EXAMPLE:
 
