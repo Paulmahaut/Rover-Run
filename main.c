@@ -85,6 +85,9 @@ int main() {
                         if (map1.soils[marc_loc1.pos.y][marc_loc1.pos.x] == REG) {
                             phase_moves = 4;
                         }
+                        if (map1.soils[marc_loc1.pos.y][marc_loc1.pos.x] == CREVASSE) {
+                            printf("YOU ARE DEAD !");
+                        }
                     }
                 }
 
@@ -150,6 +153,9 @@ int main() {
                         // Reduce phase moves if ending on a Reg soil
                         if (map2.soils[marc_loc2.pos.y][marc_loc2.pos.x] == REG) {
                             phase_moves = 4;
+                        }
+                        if (map2.soils[marc_loc2.pos.y][marc_loc2.pos.x] == CREVASSE) {
+                            printf("YOU ARE DEAD !");
                         }
                     }
                 }
