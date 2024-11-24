@@ -138,3 +138,4 @@ t_localisation move(t_localisation loc, t_move move)
     *p_loc = move(*p_loc, m);
     return;
 }*/
+
