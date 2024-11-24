@@ -22,70 +22,164 @@ void selectRandomMoves(t_move *selected_moves) {
     }
 }
 
-int main() {
-    srand(time(NULL)); // Initialize random seed
+void afficherMenu() {
+    printf("Menu:\n");
+    printf("1. Option 1\n");
+    printf("2. Option 2\n");
+    printf("3. Quitter\n");
+    printf("Choisissez une option: ");
+}
 
-    t_map map;
-    t_localisation marc_loc = loc_init(8, 5, NORTH);
+int main() {
+    int choix;
+    do {
+        afficherMenu();
+        scanf("%d", &choix);
+        switch (choix) {
+            case 1:
+                printf("Vous avez choisi l'option 1\n");
+                srand(time(NULL)); // Initialize random seed
+
+                t_map map1;
+                t_localisation marc_loc1 = loc_init(8, 5, NORTH);
 
 #if defined(_WIN32) || defined(_WIN64)
-    map = createMapFromFile("..\\maps\\example1.map");
+                map1 = createMapFromFile("..\\maps\\example1.map1");
+
 #else
-    map = createMapFromFile("../maps/example1.map");
+                map1 = createMapFromFile("../maps/example1.map1");
 #endif
 
-    printf("Map created with dimensions %d x %d\n", map.y_max, map.x_max);
-    printCostMap(map);
+                printf("Map created with dimensions %d x %d\n", map1.y_max, map1.x_max);
+                printCostMap(map1);
 
-    while (map.soils[marc_loc.pos.y][marc_loc.pos.x] != BASE_STATION) {
-        t_move selected_moves[NUM_MOVES];
-        selectRandomMoves(selected_moves);
+                while (map1.soils[marc_loc1.pos.y][marc_loc1.pos.x] != BASE_STATION) {
+                    t_move selected_moves[NUM_MOVES];
+                    selectRandomMoves(selected_moves);
 
-        printf("Selected moves:\n");
-        for (int i = 0; i < NUM_MOVES; i++) {
-            printf("%s\n", getMoveAsString(selected_moves[i]));
-        }
+                    printf("Selected moves:\n");
+                    for (int i = 0; i < NUM_MOVES; i++) {
+                        printf("%s\n", getMoveAsString(selected_moves[i]));
+                    }
 
-        int phase_moves = PHASE_MOVES;
-        int move_counts[7] = {0}; // Array to keep track of move counts
+                    int phase_moves = PHASE_MOVES;
+                    int move_counts[7] = {0}; // Array to keep track of move counts
 
-        for (int i = 0; i < phase_moves; i++) {
-            t_localisation best_loc = marc_loc;
-            int min_cost = COST_UNDEF;
-            t_move best_move = selected_moves[i];
+                    for (int i = 0; i < phase_moves; i++) {
+                        t_localisation best_loc = marc_loc1;
+                        int min_cost = COST_UNDEF;
+                        t_move best_move = selected_moves[i];
 
-            for (int j = 0; j < NUM_MOVES; j++) {
-                if (move_counts[selected_moves[j]] < 1) { // Check if the move can still be executed
-                    t_localisation new_loc = locmove(marc_loc, selected_moves[j], map);
-                    if (isValidLocalisation(new_loc.pos, map.x_max, map.y_max)) {
-                        int cost = map.costs[new_loc.pos.y][new_loc.pos.x];
-                        if (cost < min_cost) {
-                            min_cost = cost;
-                            best_move = selected_moves[j];
-                            best_loc = new_loc;
+                        for (int j = 0; j < NUM_MOVES; j++) {
+                            if (move_counts[selected_moves[j]] < 1) { // Check if the move can still be executed
+                                t_localisation new_loc = locmove(marc_loc1, selected_moves[j], map1);
+                                if (isValidLocalisation(new_loc.pos, map1.x_max, map1.y_max)) {
+                                    int cost = map1.costs[new_loc.pos.y][new_loc.pos.x];
+                                    if (cost < min_cost) {
+                                        min_cost = cost;
+                                        best_move = selected_moves[j];
+                                        best_loc = new_loc;
+                                    }
+                                }
+                            }
+                        }
+
+                        marc_loc1 = best_loc;
+                        move_counts[best_move]++; // Increment the move count
+                        printf("Move: %s\n", getMoveAsString(best_move));
+                        printf("Robot position: (%d, %d), Orientation: %s\n", marc_loc1.pos.x, marc_loc1.pos.y,
+                               (marc_loc1.ori == NORTH) ? "NORTH" : (marc_loc1.ori == EAST) ? "EAST" : (marc_loc1.ori == SOUTH) ? "SOUTH" : "WEST");
+
+                        if (map1.soils[marc_loc1.pos.y][marc_loc1.pos.x] == BASE_STATION) {
+                            printf("Robot has reached the base station.\n");
+                            break;
+                        }
+
+                        // Reduce phase moves if ending on a Reg soil
+                        if (map1.soils[marc_loc1.pos.y][marc_loc1.pos.x] == REG) {
+                            phase_moves = 4;
                         }
                     }
                 }
-            }
 
-            marc_loc = best_loc;
-            move_counts[best_move]++; // Increment the move count
-            printf("Move: %s\n", getMoveAsString(best_move));
-            printf("Robot position: (%d, %d), Orientation: %s\n", marc_loc.pos.x, marc_loc.pos.y,
-                   (marc_loc.ori == NORTH) ? "NORTH" : (marc_loc.ori == EAST) ? "EAST" : (marc_loc.ori == SOUTH) ? "SOUTH" : "WEST");
+                printCostMap(map1);
+                return 0;
+            case 2:
+                printf("Vous avez choisi l'option 2\n");
+                srand(time(NULL)); // Initialize random seed
 
-            if (map.soils[marc_loc.pos.y][marc_loc.pos.x] == BASE_STATION) {
-                printf("Robot has reached the base station.\n");
+                t_map map2;
+                t_localisation marc_loc2 = loc_init(8, 5, NORTH);
+
+#if defined(_WIN32) || defined(_WIN64)
+                map2 = createMapFromFile("..\\maps\\example2.map2");
+
+
+#else
+
+                map2 = createMapFromFile("../maps/example2.map2");
+#endif
+
+                printf("Map created with dimensions %d x %d\n", map2.y_max, map2.x_max);
+                printCostMap(map2);
+
+                while (map2.soils[marc_loc2.pos.y][marc_loc2.pos.x] != BASE_STATION) {
+                    t_move selected_moves[NUM_MOVES];
+                    selectRandomMoves(selected_moves);
+
+                    printf("Selected moves:\n");
+                    for (int i = 0; i < NUM_MOVES; i++) {
+                        printf("%s\n", getMoveAsString(selected_moves[i]));
+                    }
+
+                    int phase_moves = PHASE_MOVES;
+                    int move_counts[7] = {0}; // Array to keep track of move counts
+
+                    for (int i = 0; i < phase_moves; i++) {
+                        t_localisation best_loc = marc_loc2;
+                        int min_cost = COST_UNDEF;
+                        t_move best_move = selected_moves[i];
+
+                        for (int j = 0; j < NUM_MOVES; j++) {
+                            if (move_counts[selected_moves[j]] < 1) { // Check if the move can still be executed
+                                t_localisation new_loc = locmove(marc_loc2, selected_moves[j], map2);
+                                if (isValidLocalisation(new_loc.pos, map2.x_max, map2.y_max)) {
+                                    int cost = map2.costs[new_loc.pos.y][new_loc.pos.x];
+                                    if (cost < min_cost) {
+                                        min_cost = cost;
+                                        best_move = selected_moves[j];
+                                        best_loc = new_loc;
+                                    }
+                                }
+                            }
+                        }
+
+                        marc_loc2 = best_loc;
+                        move_counts[best_move]++; // Increment the move count
+                        printf("Move: %s\n", getMoveAsString(best_move));
+                        printf("Robot position: (%d, %d), Orientation: %s\n", marc_loc2.pos.x, marc_loc2.pos.y,
+                               (marc_loc2.ori == NORTH) ? "NORTH" : (marc_loc2.ori == EAST) ? "EAST" : (marc_loc2.ori == SOUTH) ? "SOUTH" : "WEST");
+
+                        if (map2.soils[marc_loc2.pos.y][marc_loc2.pos.x] == BASE_STATION) {
+                            printf("Robot has reached the base station.\n");
+                            break;
+                        }
+
+                        // Reduce phase moves if ending on a Reg soil
+                        if (map2.soils[marc_loc2.pos.y][marc_loc2.pos.x] == REG) {
+                            phase_moves = 4;
+                        }
+                    }
+                }
+
+                printCostMap(map2);
+                return 0;
+            case 3:
+                printf("Au revoir!\n");
                 break;
-            }
-
-            // Reduce phase moves if ending on a Reg soil
-            if (map.soils[marc_loc.pos.y][marc_loc.pos.x] == REG) {
-                phase_moves = 4;
-            }
+            default:
+                printf("Option invalide, veuillez réessayer.\n");
         }
-    }
-
-    printCostMap(map);
+    } while (choix != 3);
     return 0;
 }
