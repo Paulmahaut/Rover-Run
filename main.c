@@ -24,10 +24,10 @@ void selectRandomMoves(t_move *selected_moves) {
 
 void afficherMenu() {
     printf("Menu:\n");
-    printf("1. Option 1\n");
-    printf("2. Option 2\n");
-    printf("3. Quitter\n");
-    printf("Choisissez une option: ");
+    printf("1. 1st map of dim 10x10\n");
+    printf("2. 2nd map of dim 8x8\n");
+    printf("3. Quit\n");
+    printf("Choose an Option (between 1&3): ");
 }
 
 int main() {
@@ -37,7 +37,7 @@ int main() {
         scanf("%d", &choix);
         switch (choix) {
             case 1:
-                printf("Vous avez choisi l'option 1\n");
+                printf("You choose 1st map\n");
                 srand(time(NULL)); // Initialize random seed
 
                 t_map map1;
@@ -105,7 +105,7 @@ int main() {
                 printCostMap(map1);
                 return 0;
             case 2:
-                printf("Vous avez choisi l'option 2\n");
+                printf("You choose the 2nd map\n");
                 srand(time(NULL)); // Initialize random seed
 
                 t_map map2;
@@ -175,10 +175,10 @@ int main() {
                 printCostMap(map2);
                 return 0;
             case 3:
-                printf("Au revoir!\n");
+                printf("Goodbye!\n");
                 break;
             default:
-                printf("Option invalide, veuillez réessayer.\n");
+                printf("Invalid Option, Please Try Again.\n");
         }
     } while (choix != 3);
     return 0;
