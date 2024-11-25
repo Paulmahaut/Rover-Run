@@ -169,9 +169,9 @@ int main() {
                 t_localisation marc_loc = loc_init(1, 1, NORTH); // CHANGE THE START OF THE ROVER
 
 #if defined(_WIN32) || defined(_WIN64)
-                map = createMapFromFile("PUT THE PATH HERE"); // CHANGE THE PATH OF YOUR MAP HERE
+                map = createMapFromFile("PUT THE PATH L.172"); // CHANGE THE PATH OF YOUR MAP HERE
 #else
-                map = createMapFromFile("PUT THE PATH HERE"); // CHANGE THE PATH OF YOUR MAP HERE
+                map = createMapFromFile("PUT THE PATH L.174"); // CHANGE THE PATH OF YOUR MAP HERE
 #endif
                 printf("Map created with dimensions %d x %d\n", map.y_max, map.x_max);
                 printCostMap(map);
@@ -237,9 +237,9 @@ int main() {
                 t_localisation marc_loc3 = loc_init(8, 5, NORTH);
 
 #if defined(_WIN32) || defined(_WIN64)
-                map3 = createMapFromFile("..\\maps\\example2.map");
+                map3 = createMapFromFile("PUT THE PATH L.240"); // CHANGE THE PATH OF YOUR MAP HERE
 #else
-                map3 = createMapFromFile("../maps/example2.map");
+                map3 = createMapFromFile("PUT THE PATH L.242"); // CHANGE THE PATH OF YOUR MAP HERE
 #endif
                 printf("Map created with dimensions %d x %d\n", map3.y_max, map3.x_max);
                 clock_t start, end;
