@@ -30,7 +30,18 @@ int main() {
                 printf("You choose 1st map\n");
                 srand(time(NULL)); // Initialize random seed
                 t_map map1;
-                t_localisation marc_loc1 = loc_init(8, 5, NORTH);
+                int a,b;
+                printf("Enter the initial position of the robot (x): ");
+                scanf("%d", &a);
+                printf("Enter the initial position of the robot (y): ");
+                scanf("%d", &b);
+
+                if (a < 0 || a > 10 || b < 0 || b > 10) {
+                    printf("Invalid position, please enter a position between 0 and 10\n");
+                    break;
+                }
+
+                t_localisation marc_loc1 = loc_init(a, b, NORTH);
 
 #if defined(_WIN32) || defined(_WIN64)
                 map1 = createMapFromFile("..\\maps\\example1.map");
@@ -97,9 +108,20 @@ int main() {
             case 2:
                 printf("You choose the 2nd map\n");
                 srand(time(NULL)); // Initialize random seed
-
                 t_map map2;
-                t_localisation marc_loc2 = loc_init(1, 5, NORTH);
+                printf("You choose 2nd map\n");
+                srand(time(NULL)); // Initialize random seed
+                int c,d;
+                printf("Enter the initial position of the robot (x): ");
+                scanf("%d", &c);
+                printf("Enter the initial position of the robot (y): ");
+                scanf("%d", &d);
+
+                if (a < 0 || a > 10 || b < 0 || b > 10) {
+                    printf("Invalid position, please enter a position between 0 and 8\n");
+                    break;
+                }
+                t_localisation marc_loc2 = loc_init(a, b, NORTH);
 
 #if defined(_WIN32) || defined(_WIN64)
                 map2 = createMapFromFile("..\\maps\\example2.map");
